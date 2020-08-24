@@ -1,14 +1,17 @@
 import React from 'react';
 
 import Navbar from './components/navbar';
-import Home from './views/home';
+import Rotas from './routes';
+import { HashRouter } from 'react-router-dom';
 
 function App() {
   return (
-    <>
-      <Navbar/>
-      <Home />
-    </>
+    <HashRouter>
+      <div className="container">
+        <Navbar/>
+        <Rotas />
+      </div>
+    </HashRouter>
   );
 }
 
