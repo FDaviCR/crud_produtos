@@ -11,7 +11,8 @@ const estadoInicial = {
     preco: 0,
     fornecedor: '',
     sucesso: false,
-    errors: []
+    errors: [],
+    atualizando: false
 }
 
 class CadastroProduto extends React.Component{
@@ -59,7 +60,7 @@ class CadastroProduto extends React.Component{
 
             if(resultado.length === 1){
                 const produtoEncontrado = resultado[0]
-                this.setState({ ...produtoEncontrado });
+                this.setState({ ...produtoEncontrado, atualizando: true });
             }
         }
     }
@@ -68,7 +69,8 @@ class CadastroProduto extends React.Component{
         return (
             <div className="card">
                 <div className="card-header">
-                    Cadastro de Produto
+                    { this.state.atualizando ? 'Atualização ' : 'Cadastro '}
+                    de Produto
                 </div>
                 <div className="card-body">
 
@@ -110,6 +112,7 @@ class CadastroProduto extends React.Component{
                                 <label>SKU: *</label>
                                 <input type="text"
                                         name="sku" 
+                                        disabled={this.state.atualizando}
                                         onChange={this.onChange}
                                         value={this.state.sku} 
                                         className="form-control"/>
@@ -151,7 +154,9 @@ class CadastroProduto extends React.Component{
                     </div>
                     <div className="row">
                         <div className="col-md-1">
-                            <button onClick={this.onSubmit} className="btn btn-success">Salvar</button>
+                            <button onClick={this.onSubmit} className="btn btn-success">
+                                {this.state.atualizando ? 'Atualizar' : 'Salvar'}
+                            </button>
                         </div>
                         <div className="col-md-1">
                             <button onClick={this.limpaCampos} className="btn btn-primary">Limpar</button>
